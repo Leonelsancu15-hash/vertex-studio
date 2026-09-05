@@ -3,44 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Impressum & Datenschutz — Vertex Studio</title>
+<title>Impressum — Vertex Studio</title>
 <meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Cpath d='M6 8h5l5 12 5-12h5L18 26h-4z' fill='%23f2efe9'/%3E%3Ccircle cx='16' cy='26' r='2.2' fill='%23ff5a1f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0b0b0c;--paper:#f2efe9;--accent:#ff5a1f;--line:rgba(11,11,12,.16);--mute:rgba(11,11,12,.6)}
+:root{--ink:#0b0b0c;--paper:#f2efe9;--accent:#ff5a1f;--line:rgba(11,11,12,.16);--mute:rgba(11,11,12,.62)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:120px clamp(20px,4vw,64px) 80px}
+body{background:var(--paper);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,4vw,64px);font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.nav a{color:inherit;text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque";font-weight:600;font-size:15px;letter-spacing:-.02em;text-transform:none}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.nav ul{display:flex;gap:26px;list-style:none}
+.wrap{max-width:780px;margin:0 auto;padding:60px clamp(20px,4vw,64px) 90px}
 .mono{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
 a{color:inherit}
-h1{font-size:clamp(38px,6vw,72px);font-weight:500;letter-spacing:-.035em;line-height:1;margin:16px 0 48px}
+h1{font-size:clamp(38px,6vw,72px);font-weight:500;letter-spacing:-.035em;line-height:1;margin:16px 0 20px}
 h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400}
+.intro{color:var(--mute);margin-bottom:40px;max-width:60ch}
 h2{font-size:22px;font-weight:500;letter-spacing:-.02em;margin:48px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
-p{margin-bottom:12px;max-width:62ch}
+h3{font-size:17px;font-weight:500;margin:22px 0 8px}
+p,li{margin-bottom:12px;max-width:66ch}
+ol,ul{padding-left:22px}
 .back{display:inline-block;margin-top:60px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:14px 22px;border-radius:999px}
 .back:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:640px){.nav ul{display:none}}
 </style>
 </head>
 <body>
+<header class="nav"><a class="logo" href="index.html"><i></i>VERTEX STUDIO</a><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li></ul></header>
 <div class="wrap">
-  <p class="mono">Vertex Studio</p>
-  <h1>Impressum <em>&amp; Datenschutz</em></h1>
+  <p class="mono">Vertex Studio · Rechtliches</p>
+  <h1>Impressum</h1>
 
   <h2>Angaben gemäß § 5 DDG</h2>
-  <p>Vertex Studio<br>Leonel Sancu<br>Webdesign &amp; Entwicklung</p>
+  <p>Vertex Studio<br>Leonel Sancu<br>Langwartweg 23<br>53129 Bonn<br>Deutschland</p>
   <p>E-Mail: <a href="mailto:Leonelsancu15@icloud.com">Leonelsancu15@icloud.com</a></p>
-  <p class="mono">Postanschrift und ggf. USt-IdNr. folgen mit der Gewerbeanmeldung.</p>
 
-  <h2>Verantwortlich für den Inhalt</h2>
-  <p>Leonel Sancu (Anschrift wie oben).</p>
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>Leonel Sancu<br>Langwartweg 23<br>53129 Bonn</p>
 
-  <h2>Datenschutz</h2>
-  <p>Diese Website speichert keine Cookies und setzt keine Tracking-Dienste ein.</p>
-  <p><strong>Kontaktformular.</strong> Wenn Sie das Anfrageformular nutzen, werden Ihre Angaben (Name, E-Mail-Adresse, Unternehmen, Nachricht) über den Dienst FormSubmit (formsubmit.co) per E-Mail an mich übermittelt und ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind.</p>
-  <p><strong>Hosting.</strong> Die Website wird über GitHub Pages (GitHub Inc., USA) ausgeliefert. Beim Aufruf werden technisch notwendige Verbindungsdaten (u. a. IP-Adresse, Zeitpunkt, aufgerufene Seite) durch GitHub verarbeitet. Details: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</p>
-  <p><strong>Externe Inhalte.</strong> Schriften werden von Google Fonts, Skript-Bibliotheken von cdnjs (Cloudflare) und unpkg geladen; Vorschaubilder der Referenzprojekte werden über thum.io erzeugt. Dabei wird Ihre IP-Adresse an den jeweiligen Anbieter übermittelt.</p>
-  <p><strong>Ihre Rechte.</strong> Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Wenden Sie sich dazu an die oben genannte E-Mail-Adresse.</p>
+  <h2>Streitbeilegung</h2>
+  <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>. Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+
+  <h2>Haftung für Links</h2>
+  <p>Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für diese fremden Inhalte übernehme ich keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden derartige Links umgehend entfernt.</p>
+
+  <h2>Urheberrecht</h2>
+  <p>Die auf dieser Website erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Die abgebildeten Referenzprojekte werden mit Zustimmung der jeweiligen Inhaber gezeigt.</p>
+
+  <p class="mono" style="margin-top:40px">Siehe auch: <a href="datenschutz.html">Datenschutzerklärung</a> · <a href="agb.html">AGB</a></p>
 
   <a class="back" href="index.html">← Zurück zur Startseite</a>
 </div>
