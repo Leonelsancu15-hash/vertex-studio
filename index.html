@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="de" class="theme-dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertex Studio — Webdesign & Entwicklung | Websites, die hängen bleiben</title>
+<meta name="description" content="Vertex Studio: Ein-Personen-Studio für filmische, handgeschriebene Websites. Landingpages, Business-Websites und Shops – mit kostenloser Demo vor dem Kauf.">
+<meta property="og:title" content="Vertex Studio — Websites, die hängen bleiben">
+<meta property="og:description" content="Filmische Websites, handgeschrieben. Kostenlose Demo vor dem Kauf.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Cpath d='M6 8h5l5 12 5-12h5L18 26h-4z' fill='%23f2efe9'/%3E%3Ccircle cx='16' cy='26' r='2.2' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VERTEX STUDIO — Design system
+   Thesis: „Der Punkt, an dem alles zusammenläuft.“
+   Ink & Paper. Ein Akzent. Große Typografie. Eine Bewegung.
+   Fonts: Bricolage Grotesque (Display), Instrument Serif (Italic-Akzent),
+          JetBrains Mono (Metadaten). Motion: GSAP + ScrollTrigger + Lenis.
+   ============================================================ */
+:root{
+  --ink:#0b0b0c; --ink-2:#141416; --ink-3:#1f1f22;
+  --paper:#f2efe9; --paper-2:#e9e4da; --paper-3:#d9d2c4;
+  --accent:#ff5a1f; --accent-ink:#c93f10;
+  --bg:var(--ink); --fg:var(--paper); --fg-mute:rgba(242,239,233,.58); --line:rgba(242,239,233,.16);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --gutter:clamp(20px,4vw,64px);
+  --max:1440px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html.theme-light{ --bg:var(--paper); --fg:var(--ink); --fg-mute:rgba(11,11,12,.6); --line:rgba(11,11,12,.16); }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--display);font-weight:400;
+  line-height:1.5;font-size:clamp(16px,1.05vw,18px);
+  transition:background-color .8s var(--ease),color .8s var(--ease);
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+::selection{background:var(--accent);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+/* type roles */
+.mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute)}
+.serif-i{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+h1,h2,h3{font-weight:500;letter-spacing:-.035em;line-height:.98;text-wrap:balance}
+.h-xl{font-size:clamp(46px,9.2vw,152px);font-variation-settings:"opsz" 96}
+.h-l{font-size:clamp(38px,6.4vw,104px);font-variation-settings:"opsz" 96}
+.h-m{font-size:clamp(30px,4vw,60px);font-variation-settings:"opsz" 72}
+.h-s{font-size:clamp(22px,2.2vw,32px);font-variation-settings:"opsz" 48;letter-spacing:-.02em}
+.lead{font-size:clamp(18px,1.55vw,24px);line-height:1.4;letter-spacing:-.01em;max-width:34ch}
+p{max-width:62ch}
+.mute{color:var(--fg-mute)}
+.rule{border:0;border-top:1px solid var(--line)}
+
+/* motion foundation: without JS everything is visible */
+html.has-motion [data-split],html.has-motion [data-reveal],html.has-motion [data-clip]{visibility:hidden}
+.w-mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.w{display:inline-block;will-change:transform,opacity}
+[data-clip]{overflow:hidden}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;padding:22px var(--gutter);display:flex;align-items:center;justify-content:space-between;mix-blend-mode:difference;color:#f2efe9}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:15px}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block;mix-blend-mode:normal}
+.nav ul{display:flex;gap:34px;list-style:none}
+.nav ul a{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.nav ul a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid currentColor;padding:10px 16px;border-radius:999px;transition:background .4s var(--ease),color .4s var(--ease)}
+.nav-cta:hover{background:#f2efe9;color:#0b0b0c}
+.burger{display:none;width:44px;height:44px;position:relative}
+.burger span{position:absolute;left:12px;right:12px;height:1.5px;background:currentColor;transition:transform .5s var(--ease),top .5s var(--ease)}
+.burger span:first-child{top:18px}.burger span:last-child{top:26px}
+.menu-open .burger span:first-child{top:22px;transform:rotate(45deg)}
+.menu-open .burger span:last-child{top:22px;transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:55;background:var(--ink);color:var(--paper);display:none;flex-direction:column;justify-content:center;padding:var(--gutter)}
+.menu-open .menu{display:flex}
+.menu a{font-size:clamp(36px,10vw,64px);font-weight:500;letter-spacing:-.03em;line-height:1.1;padding:6px 0;border-bottom:1px solid rgba(242,239,233,.12)}
+.menu .mono{margin-top:28px}
+@media (max-width:860px){.nav ul,.nav-cta{display:none}.burger{display:block}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;isolation:isolate}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero-grad{position:absolute;inset:auto 0 0 0;height:40%;z-index:-1;background:linear-gradient(to top,var(--ink) 0%,rgba(11,11,12,0) 100%);pointer-events:none}
+.hero-inner{display:grid;align-content:end;gap:34px;padding-top:140px;padding-bottom:56px}
+.hero h1{max-width:12ch}
+.hero .lead{max-width:44ch}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:16px 24px;border-radius:999px;border:1px solid var(--line);position:relative;overflow:hidden;transition:color .5s var(--ease),border-color .5s var(--ease);will-change:transform}
+.btn::before{content:"";position:absolute;inset:0;background:var(--fg);transform:translateY(101%);transition:transform .55s var(--ease);border-radius:inherit}
+.btn:hover::before{transform:translateY(0)}
+.btn:hover{color:var(--bg);border-color:var(--fg)}
+.btn>*{position:relative}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.btn-solid::before{background:var(--fg)}
+.btn-solid:hover{color:var(--bg);border-color:var(--fg)}
+.btn .arr{width:14px;height:14px;transition:transform .5s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding-bottom:26px;border-top:1px solid var(--line);padding-top:18px}
+.hero-foot .mono{display:flex;gap:26px;flex-wrap:wrap}
+.scroll-hint{display:flex;align-items:center;gap:12px}
+.scroll-hint i{width:1px;height:36px;background:var(--fg-mute);display:block;position:relative;overflow:hidden}
+.scroll-hint i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:100%;background:var(--fg);animation:drop 1.8s var(--ease) infinite}
+@keyframes drop{0%{top:-100%}60%{top:100%}100%{top:100%}}
+@media (max-width:640px){.hero-foot .mono span:nth-child(3){display:none}}
+
+/* ---------- manifest (sticky scrub) ---------- */
+.manifest{height:340vh;position:relative}
+.manifest-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center;overflow:hidden}
+.manifest-line{position:absolute;text-align:center;padding:0 var(--gutter);max-width:16ch}
+.manifest-line b{font-weight:500}
+.manifest-idx{position:absolute;bottom:34px;left:var(--gutter);right:var(--gutter);display:flex;justify-content:space-between}
+.manifest-bar{position:absolute;left:var(--gutter);right:var(--gutter);bottom:26px;height:1px;background:var(--line)}
+.manifest-bar i{position:absolute;left:0;top:0;height:100%;width:100%;background:var(--fg);transform-origin:left;transform:scaleX(0)}
+
+/* ---------- generic section ---------- */
+.sec{padding:clamp(96px,12vw,180px) 0;position:relative}
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;margin-bottom:clamp(40px,6vw,80px)}
+.sec-head .mono{display:flex;gap:16px}
+.sec-head .mono b{color:var(--fg);font-weight:500}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,120px);align-items:start}
+.about-copy{display:grid;gap:26px}
+.about-copy p{font-size:clamp(17px,1.3vw,21px);line-height:1.55}
+.about-side{display:grid;gap:0;position:sticky;top:120px}
+.fact{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+.fact:last-child{border-bottom:1px solid var(--line)}
+.fact .mono{padding-top:5px}
+.fact strong{font-weight:500;letter-spacing:-.01em;font-size:clamp(17px,1.2vw,20px);display:block}
+.fact span{color:var(--fg-mute);font-size:15px;display:block;margin-top:4px}
+.stack{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:8px}
+.stack li{list-style:none;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--fg-mute)}
+.stack li::before{content:"—";margin-right:8px;color:var(--accent)}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.about-side{position:static}}
+
+/* ---------- work ---------- */
+.work{padding-bottom:0}
+.case{display:grid;grid-template-columns:1fr;gap:28px;padding:clamp(48px,7vw,110px) 0;border-top:1px solid var(--line)}
+.case-meta{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline}
+.case-meta h3{font-size:clamp(34px,5.4vw,84px);font-weight:500;letter-spacing:-.035em}
+.case-meta .mono{text-align:right}
+.case-media{position:relative;aspect-ratio:16/9.6;background:var(--ink-2);overflow:hidden;border-radius:6px}
+.case-media .frame{position:absolute;inset:0}
+.case-media img{width:100%;height:118%;object-fit:cover;object-position:top;will-change:transform;transition:opacity .6s var(--ease)}
+.case-media .poster{position:absolute;inset:0;display:grid;align-content:end;padding:clamp(20px,4vw,56px);color:#f2efe9;background:#0b0b0c}
+.case-media .poster .t{font-size:clamp(28px,5vw,88px);letter-spacing:-.035em;line-height:.95;font-weight:500}
+.case-media .poster .t .serif-i{display:block}
+.case-media .poster .mono{margin-bottom:14px;color:rgba(242,239,233,.6)}
+.case-media.has-shot .poster{display:none}
+.case-link{position:absolute;inset:0;z-index:2;display:block}
+.case-media .badge{position:absolute;top:18px;left:18px;z-index:3;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,11,12,.72);color:#f2efe9;padding:8px 12px;border-radius:999px;backdrop-filter:blur(6px);display:flex;gap:8px;align-items:center}
+.case-media .badge i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.case-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,80px);align-items:start}
+.case-body p{font-size:clamp(16px,1.2vw,19px);line-height:1.55}
+.case-tags{display:grid;gap:0}
+.case-tags div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.case-tags div:last-child{border-bottom:1px solid var(--line)}
+.case-tags .mono{padding-top:3px}
+.case-cta{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-top:10px}
+.case-cta .arr{width:14px;height:14px;transition:transform .5s var(--ease)}
+.case-cta:hover .arr{transform:translate(4px,-4px)}
+.case-media:hover img{opacity:.92}
+@media (max-width:860px){.case-body{grid-template-columns:1fr}.case-meta{grid-template-columns:1fr}.case-meta .mono{text-align:left}.case-media{aspect-ratio:4/3}}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:28px 28px 40px 0;border-right:1px solid var(--line);display:grid;align-content:start;gap:16px;min-height:280px}
+.step:last-child{border-right:0}
+.step .num{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.step h3{font-size:clamp(22px,1.9vw,30px);font-weight:500;letter-spacing:-.025em}
+.step p{font-size:15.5px;color:var(--fg-mute);line-height:1.55}
+.step:not(:first-child){padding-left:28px}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}.step{border-right:0;border-bottom:1px solid var(--line);padding-left:0!important;min-height:0}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* ---------- pricing ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.plan{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(28px,3vw,44px);display:grid;align-content:start;gap:22px;position:relative;transition:background .5s var(--ease)}
+.plan:hover{background:rgba(11,11,12,.035)}
+.plan-top{display:flex;justify-content:space-between;align-items:baseline}
+.plan h3{font-size:clamp(26px,2.4vw,38px);font-weight:500;letter-spacing:-.03em}
+.plan .flag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);border:1px solid currentColor;padding:5px 10px;border-radius:999px}
+.plan .for{font-size:15.5px;color:var(--fg-mute);min-height:3.2em}
+.price{display:flex;align-items:baseline;gap:8px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price .mono{transform:translateY(-2px)}
+.price b{font-size:clamp(34px,3.4vw,52px);font-weight:500;letter-spacing:-.04em;line-height:1}
+.price small{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute)}
+.plan ul{list-style:none;display:grid;gap:10px}
+.plan li{font-size:15px;padding-left:22px;position:relative;line-height:1.45}
+.plan li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:1px;background:var(--fg)}
+.plan .time{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--fg-mute)}
+.plan .btn{justify-self:start;margin-top:8px}
+.plan-featured{background:var(--ink);color:var(--paper);--fg:var(--paper);--bg:var(--ink);--fg-mute:rgba(242,239,233,.6);--line:rgba(242,239,233,.16)}
+.plan-featured:hover{background:var(--ink)}
+.plan-featured .flag{color:var(--accent)}
+.plan-featured .btn{color:var(--ink)}
+.plan-featured .btn::before{background:var(--paper)}
+.plans-note{display:grid;grid-template-columns:1fr 1fr;gap:24px 60px;margin-top:36px;font-size:15px;color:var(--fg-mute)}
+.plans-note strong{color:var(--fg);font-weight:500}
+@media (max-width:980px){.plans{grid-template-columns:1fr}.plan .for{min-height:0}.plans-note{grid-template-columns:1fr}}
+
+/* ---------- demo ---------- */
+.demo{overflow:hidden}
+.demo-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,120px);align-items:end}
+.demo h2 .serif-i{color:var(--accent)}
+.demo-steps{display:grid;gap:0;border-top:1px solid var(--line)}
+.demo-steps div{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);font-size:16px;line-height:1.45}
+.demo-steps .mono{color:var(--accent);padding-top:3px}
+.demo-big{font-family:var(--serif);font-style:italic;font-size:clamp(120px,26vw,420px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px var(--line);position:absolute;right:-.06em;bottom:-.12em;pointer-events:none;user-select:none;white-space:nowrap}
+@media (max-width:900px){.demo-grid{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,6vw,120px);align-items:start}
+.contact-aside{display:grid;gap:26px;position:sticky;top:120px}
+.contact-aside a.mail{font-size:clamp(20px,2vw,28px);letter-spacing:-.02em;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:var(--line);transition:text-decoration-color .4s}
+.contact-aside a.mail:hover{text-decoration-color:var(--accent)}
+form{display:grid;gap:0}
+.field{display:grid;gap:8px;padding:22px 0;border-top:1px solid var(--line);position:relative}
+.field label{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute)}
+.field input,.field textarea,.field select{width:100%;background:transparent;border:0;border-bottom:1px solid transparent;color:var(--fg);font:inherit;font-size:clamp(18px,1.5vw,24px);letter-spacing:-.01em;padding:6px 0;border-radius:0;-webkit-appearance:none;appearance:none}
+.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f2efe9' stroke-width='1.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:30px}
+.field select option{color:#0b0b0c}
+.field textarea{min-height:120px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(242,239,233,.28)}
+.field input:focus,.field textarea:focus,.field select:focus{outline:0;border-bottom-color:var(--accent)}
+.field.err label{color:var(--accent)}
+.field .msg{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent);display:none}
+.field.err .msg{display:block}
+.choices{display:flex;flex-wrap:wrap;gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;inset:0;opacity:0}
+.choice span{display:inline-block;padding:12px 18px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease);cursor:pointer}
+.choice input:checked+span{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.choice input:focus-visible+span{outline:2px solid var(--accent);outline-offset:3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 40px}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:22px;padding-top:28px;border-top:1px solid var(--line)}
+.form-foot .mono{max-width:38ch;text-transform:none;letter-spacing:.02em;line-height:1.5}
+.btn[disabled]{opacity:.55;cursor:progress}
+.form-ok{display:none;padding:40px 0 10px;gap:16px}
+form.done .form-ok{display:grid}
+form.done .field,form.done .form-foot,form.done .two{display:none}
+.form-ok h3{font-size:clamp(28px,3vw,44px);font-weight:500;letter-spacing:-.03em}
+.honey{position:absolute;left:-9999px;opacity:0}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}.contact-aside{position:static}}
+@media (max-width:600px){.two{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer{padding:60px 0 32px;border-top:1px solid var(--line)}
+.foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px 40px;align-items:end}
+.foot-grid ul{list-style:none;display:flex;gap:26px;flex-wrap:wrap}
+.foot-mark{font-size:clamp(64px,16vw,260px);font-weight:600;letter-spacing:-.05em;line-height:.8;margin:50px 0 30px;opacity:.96}
+.foot-mark .serif-i{font-weight:400}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;left:0;top:0;z-index:100;pointer-events:none;width:12px;height:12px;border-radius:50%;background:#f2efe9;mix-blend-mode:difference;transform:translate(-50%,-50%);display:none}
+.cursor-label{position:fixed;left:0;top:0;z-index:100;pointer-events:none;transform:translate(-50%,-50%) scale(0);width:96px;height:96px;border-radius:50%;background:var(--accent);color:var(--ink);display:grid;place-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:center;line-height:1.3}
+@media (hover:hover) and (pointer:fine){html.has-motion .cursor{display:block}}
+@media (prefers-reduced-motion:reduce){.cursor,.cursor-label{display:none!important}.scroll-hint i::after{animation:none}.case-media .badge i{animation:none}}
+</style>
+</head>
+<body>
+
+<a class="sr" href="#main">Zum Inhalt springen</a>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-label" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="Vertex Studio – Startseite"><i></i>VERTEX STUDIO</a>
+  <nav aria-label="Hauptnavigation">
+    <ul>
+      <li><a href="#about">Studio</a></li>
+      <li><a href="#work">Arbeiten</a></li>
+      <li><a href="#process">Ablauf</a></li>
+      <li><a href="#pricing">Pakete</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+  <a class="nav-cta" href="#demo">Kostenlose Demo</a>
+  <button class="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+</header>
+<div class="menu" id="menu">
+  <a href="#about">Studio</a>
+  <a href="#work">Arbeiten</a>
+  <a href="#process">Ablauf</a>
+  <a href="#pricing">Pakete</a>
+  <a href="#demo">Kostenlose Demo</a>
+  <a href="#contact">Kontakt</a>
+  <p class="mono">Vertex Studio · Webdesign & Entwicklung</p>
+</div>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" data-theme="dark">
+  <canvas id="mesh" aria-hidden="true"></canvas>
+  <div class="hero-grad" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="mono" data-reveal>Webdesign & Entwicklung · Ein-Personen-Studio</p>
+    <h1 class="h-xl" data-split="words">Websites, die <em class="serif-i">hängen bleiben.</em></h1>
+    <p class="lead" data-reveal>Ich gestalte und entwickle filmische Websites für Marken, Studios und Selbstständige – von der ersten Skizze bis zum Livegang. Persönlich, handgeschrieben, ohne Agentur-Overhead.</p>
+    <div class="hero-actions" data-reveal>
+      <a class="btn btn-solid" href="#demo" data-magnetic><span>Kostenlose Demo anfragen</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" href="#work" data-magnetic><span>Arbeiten ansehen</span></a>
+    </div>
+  </div>
+  <div class="wrap hero-foot" data-reveal>
+    <div class="mono"><span>Vertex Studio</span><span>Konzept · Design · Code</span><span>Deutschland · Remote</span></div>
+    <div class="scroll-hint mono"><i></i><span>Scrollen</span></div>
+  </div>
+</section>
+
+<!-- ================= MANIFEST ================= -->
+<section class="manifest" data-theme="dark" aria-label="Haltung">
+  <div class="manifest-stage">
+    <p class="manifest-line h-l" data-m="0">Kein Baukasten.</p>
+    <p class="manifest-line h-l" data-m="1">Keine Vorlage.</p>
+    <p class="manifest-line h-l" data-m="2">Jede Zeile <em class="serif-i">von Hand</em> geschrieben.</p>
+    <p class="manifest-line h-l" data-m="3">Damit Ihre Seite aussieht wie <b>Ihr Unternehmen</b> – nicht wie alle anderen.</p>
+    <div class="manifest-idx mono"><span>Haltung</span><span data-m-idx>01 / 04</span></div>
+    <div class="manifest-bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="sec" id="about" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Ich bin Leonel. Ich baue Websites, die sich anfühlen wie ein <em class="serif-i">Film</em> – und laden wie ein Blitz.</h2>
+      <p class="mono"><b>01</b> Studio</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p data-reveal>Vertex Studio ist ein Ein-Personen-Studio. Das heißt: Sie sprechen von Anfang bis Ende mit der Person, die Ihre Website tatsächlich entwirft und programmiert. Keine Weitergabe an Junior-Teams, keine Ticketsysteme, keine Übersetzungsverluste zwischen Beratung, Design und Code.</p>
+        <p data-reveal>Der Name ist Programm: Ein Vertex ist der Punkt, an dem Linien zusammenlaufen. Genau dort arbeite ich – wo Strategie, Gestaltung und Technik sich treffen. Jede Seite wird von Grund auf für Sie geschrieben: eigene Typografie, eigene Bildsprache, eigene Scroll-Dramaturgie. Nichts davon kommt aus einer Vorlage.</p>
+        <p data-reveal>Was Sie am Ende bekommen, ist keine Baukasten-Seite mit austauschbarem Design, sondern ein Auftritt, der Ihre Geschichte in der ersten Sekunde erzählt – schnell, barrierearm und auf jedem Gerät sauber.</p>
+        <ul class="stack" data-reveal aria-label="Werkzeuge">
+          <li>HTML · CSS · JavaScript</li><li>GSAP & ScrollTrigger</li><li>Lenis Smooth Scroll</li><li>Shopify · WooCommerce</li><li>GitHub Pages · Netlify</li><li>Figma</li>
+        </ul>
+      </div>
+      <aside class="about-side" data-reveal>
+        <div class="fact"><span class="mono">Was</span><div><strong>Konzept, Design & Entwicklung</strong><span>Alles aus einer Hand – von der Idee bis zum Livegang.</span></div></div>
+        <div class="fact"><span class="mono">Für wen</span><div><strong>Marken, Studios, Selbstständige</strong><span>Alle, die mehr wollen als eine Vorlage.</span></div></div>
+        <div class="fact"><span class="mono">Wie</span><div><strong>Direkt & persönlich</strong><span>Ein Ansprechpartner. Kurze Wege. Ehrliche Preise.</span></div></div>
+        <div class="fact"><span class="mono">Wo</span><div><strong>Deutschland, remote</strong><span>Gespräche per Video, Telefon oder E-Mail.</span></div></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section class="sec work" id="work" data-theme="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Ausgewählte <em class="serif-i">Arbeiten.</em></h2>
+      <p class="mono"><b>02</b> Live-Projekte</p>
+    </div>
+
+    <!-- Archangel Armor -->
+    <article class="case">
+      <div class="case-meta" data-reveal>
+        <span class="mono">A —</span>
+        <h3>Archangel Armor</h3>
+        <span class="mono">Gym & Street Apparel · Brand-Site</span>
+      </div>
+      <div class="case-media" data-clip data-parallax>
+        <span class="badge"><i></i>Live</span>
+        <div class="frame">
+          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/https://archangel-armor.com" alt="Startseite von archangel-armor.com: dunkle Hero-Szene mit dem Schriftzug ‚This is not fashion. This is armor.‘" loading="lazy" decoding="async">
+          <div class="poster" aria-hidden="true"><p class="mono">archangel-armor.com</p><p class="t">This is not fashion.<span class="serif-i">This is armor.</span></p></div>
+        </div>
+        <a class="case-link" href="https://archangel-armor.com" target="_blank" rel="noopener" aria-label="Archangel Armor live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
+      </div>
+      <div class="case-body">
+        <div>
+          <p data-reveal>Eine Apparel-Marke, die sich als Rüstung versteht – dunkel, schwer, kompromisslos. Die Website inszeniert das Markenwappen als scroll-gesteuerte Schmiede-Sequenz: Mit jedem Scroll wird das Crest „geschmiedet“, Kapitel für Kapitel, bevor die Kollektion erscheint. Kein Katalog-Look, sondern ein Markenfilm zum Durchscrollen.</p>
+          <a class="case-cta" href="https://archangel-armor.com" target="_blank" rel="noopener" data-reveal>archangel-armor.com <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="case-tags" data-reveal>
+          <div><span class="mono">Leistung</span><span>Konzept, Art Direction, Design, Entwicklung</span></div>
+          <div><span class="mono">Besonderheit</span><span>Scroll-gesteuerte Wappen-Sequenz, Kapitel-Dramaturgie</span></div>
+          <div><span class="mono">Technik</span><span>GSAP · ScrollTrigger · Smooth Scroll · eigene Domain</span></div>
+          <div><span class="mono">Sprache</span><span>Englisch</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Nala Moon Studio -->
+    <article class="case">
+      <div class="case-meta" data-reveal>
+        <span class="mono">B —</span>
+        <h3>Nala Moon Studio</h3>
+        <span class="mono">3D-Druck-Manufaktur · Studio-Site mit Shop-Vorschau</span>
+      </div>
+      <div class="case-media" data-clip data-parallax>
+        <span class="badge"><i></i>Live</span>
+        <div class="frame">
+          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/http://nalamoon-studio.com" alt="Startseite von nalamoon-studio.com: warme, dunkle Hero-Szene mit der Zeile ‚Kleine Ideen. Gedruckt mit Liebe.‘" loading="lazy" decoding="async">
+          <div class="poster" aria-hidden="true"><p class="mono">nalamoon-studio.com</p><p class="t">Kleine Ideen.<span class="serif-i">Gedruckt mit Liebe.</span></p></div>
+        </div>
+        <a class="case-link" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" aria-label="Nala Moon Studio live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
+      </div>
+      <div class="case-body">
+        <div>
+          <p data-reveal>Ein kleines 3D-Druck-Studio aus Bonn, das personalisierte Unikate fertigt. Die Website erzählt den Druckprozess als Geschichte: „Schicht für Schicht“ baut sich die Seite beim Scrollen auf – von der Idee über Slicing und Druck bis zum verpackten Produkt. Warm, persönlich, mit Gründerinnen-Story, Produktwelt und Kollektionsvorschau.</p>
+          <a class="case-cta" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" data-reveal>nalamoon-studio.com <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+        <div class="case-tags" data-reveal>
+          <div><span class="mono">Leistung</span><span>Konzept, Design, Entwicklung, Texte, Domain-Setup</span></div>
+          <div><span class="mono">Besonderheit</span><span>Prozess als Scroll-Story, Kapitel-Aufbau, Produktvorschau</span></div>
+          <div><span class="mono">Technik</span><span>GSAP · ScrollTrigger · Smooth Scroll · GitHub Pages</span></div>
+          <div><span class="mono">Sprache</span><span>Deutsch</span></div>
+        </div>
+      </div>
+    </article>
+    <hr class="rule">
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="sec" id="process" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Vom ersten Gespräch bis zum <em class="serif-i">Livegang.</em></h2>
+      <p class="mono"><b>03</b> Ablauf</p>
+    </div>
+    <div class="steps" data-reveal-group>
+      <div class="step" data-reveal><span class="num">01</span><h3>Gespräch</h3><p>30 Minuten per Video oder Telefon. Was macht Ihr Unternehmen besonders, wer soll die Seite sehen, was soll sie auslösen? Danach wissen wir beide, ob es passt.</p></div>
+      <div class="step" data-reveal><span class="num">02</span><h3>Kostenlose Demo</h3><p>Innerhalb von fünf Werktagen baue ich eine erste Demo Ihrer Startseite – echte Typografie, echte Bewegung, Ihr Inhalt. Kostenlos und unverbindlich.</p></div>
+      <div class="step" data-reveal><span class="num">03</span><h3>Design & Entwicklung</h3><p>Gefällt die Richtung, wird aus der Demo die fertige Website. Sie sehen den Fortschritt an einer Vorschau-Adresse und geben Feedback in festen Korrekturrunden.</p></div>
+      <div class="step" data-reveal><span class="num">04</span><h3>Livegang & Betreuung</h3><p>Domain, Hosting, Formulare, Google-Einträge – ich schalte alles live und erkläre Ihnen, wie Sie Texte selbst anpassen. Auf Wunsch betreue ich die Seite weiter.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="sec" id="pricing" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Drei Pakete. <em class="serif-i">Feste Preise.</em></h2>
+      <p class="mono"><b>04</b> Leistungen</p>
+    </div>
+    <div class="plans" data-reveal-group>
+      <div class="plan" data-reveal>
+        <div class="plan-top"><h3>Signal</h3><span class="mono">Landingpage</span></div>
+        <p class="for">Für Selbstständige, Produkte und Aktionen, die eine starke Seite brauchen – nicht zehn schwache.</p>
+        <div class="price"><span class="mono">ab</span><b>1.490 €</b><small>netto</small></div>
+        <ul>
+          <li>Eine Seite als Scroll-Story mit Hero, Leistungen, Über-mich und Kontakt</li>
+          <li>Individuelles Design, eigene Typografie & Bewegung</li>
+          <li>Kontaktformular, Mobil-Optimierung, SEO-Grundlagen</li>
+          <li>Domain- & Hosting-Einrichtung</li>
+          <li>2 Korrekturrunden</li>
+        </ul>
+        <span class="time">Lieferung in ca. 2 Wochen</span>
+        <a class="btn" href="#contact" data-plan="Signal – Landingpage"><span>Signal anfragen</span></a>
+      </div>
+      <div class="plan plan-featured" data-reveal>
+        <div class="plan-top"><h3>Studio</h3><span class="flag">Am häufigsten gewählt</span></div>
+        <p class="for">Für Unternehmen, Praxen, Studios und Handwerk, die einen kompletten Auftritt mit mehreren Seiten brauchen.</p>
+        <div class="price"><span class="mono">ab</span><b>3.490 €</b><small>netto</small></div>
+        <ul>
+          <li>Bis zu 6 Unterseiten (z. B. Leistungen, Team, Referenzen, Kontakt)</li>
+          <li>Eigenes Design-System, filmische Scroll-Choreographie</li>
+          <li>Formulare, Google-Unternehmensprofil, Analytics (datenschutzkonform)</li>
+          <li>Texte gemeinsam schärfen, Bildauswahl & -bearbeitung</li>
+          <li>3 Korrekturrunden, Einweisung zum Selbstpflegen</li>
+        </ul>
+        <span class="time">Lieferung in ca. 4 Wochen</span>
+        <a class="btn btn-solid" href="#contact" data-plan="Studio – Business-Website"><span>Studio anfragen</span></a>
+      </div>
+      <div class="plan" data-reveal>
+        <div class="plan-top"><h3>Commerce</h3><span class="mono">Shop-Website</span></div>
+        <p class="for">Für Marken und Manufakturen, die online verkaufen wollen – mit einem Shop, der sich nicht wie ein Shop anfühlt.</p>
+        <div class="price"><span class="mono">ab</span><b>5.900 €</b><small>netto</small></div>
+        <ul>
+          <li>Markenauftritt plus Shop (Shopify oder WooCommerce)</li>
+          <li>Produktseiten, Kategorien, Warenkorb & Checkout</li>
+          <li>Zahlungsarten, Versand, Steuern, Rechtstexte-Einbindung</li>
+          <li>Produkt-Import bis 50 Artikel, Schulung für Ihr Team</li>
+          <li>3 Korrekturrunden, 30 Tage Support nach Livegang</li>
+        </ul>
+        <span class="time">Lieferung in ca. 6–8 Wochen</span>
+        <a class="btn" href="#contact" data-plan="Commerce – Shop-Website"><span>Commerce anfragen</span></a>
+      </div>
+    </div>
+    <div class="plans-note" data-reveal>
+      <p><strong>Festpreis statt Überraschung.</strong> Nach dem Erstgespräch erhalten Sie ein verbindliches Angebot. Was nicht drin ist, steht drin – und was dazukommt, wird vorher besprochen.</p>
+      <p><strong>Betreuung optional ab 79 € / Monat:</strong> Hosting, Updates, kleine Änderungen und ein Ansprechpartner, der Ihre Seite kennt. Alle Preise zzgl. 19 % USt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEMO ================= -->
+<section class="sec demo" id="demo" data-theme="dark">
+  <span class="demo-big" aria-hidden="true">Demo</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Erst sehen, <em class="serif-i">dann entscheiden.</em></h2>
+      <p class="mono"><b>05</b> Kostenlose Demo</p>
+    </div>
+    <div class="demo-grid">
+      <div>
+        <p class="lead" data-reveal>Sie müssen nichts kaufen, um zu wissen, wie Ihre Website aussehen könnte. Beschreiben Sie mir Ihr Unternehmen – ich baue Ihnen innerhalb von fünf Werktagen eine echte Demo Ihrer Startseite. Unverbindlich, ohne Vorkasse.</p>
+        <div style="margin-top:34px" data-reveal><a class="btn btn-solid" href="#contact" data-magnetic data-plan="Kostenlose Demo"><span>Demo anfragen</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="demo-steps" data-reveal>
+        <div><span class="mono">01</span><span>Sie schicken mir drei Sätze über Ihr Unternehmen, Ihre Website (falls vorhanden) und was Sie sich wünschen.</span></div>
+        <div><span class="mono">02</span><span>Ich baue eine Demo der Startseite unter einer privaten Vorschau-Adresse – mit Ihrem Namen, Ihren Farben, Ihrer Geschichte.</span></div>
+        <div><span class="mono">03</span><span>Gefällt es Ihnen, wird daraus Ihr Projekt. Wenn nicht, war es ein Blick in die Zukunft – und kostet Sie nichts.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sec" id="contact" data-theme="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Erzählen Sie mir von Ihrem <em class="serif-i">Projekt.</em></h2>
+      <p class="mono"><b>06</b> Anfrage</p>
+    </div>
+    <div class="contact-grid">
+      <aside class="contact-aside" data-reveal>
+        <p class="mute">Ob Demo oder konkretes Paket – schreiben Sie mir kurz, worum es geht. Ich antworte in der Regel innerhalb eines Werktags.</p>
+        <a class="mail" href="mailto:Leonelsancu15@icloud.com">Leonelsancu15@icloud.com</a>
+        <p class="mono">Antwort meist innerhalb von 24 h · Mo–Fr</p>
+      </aside>
+      <form id="form" action="https://formsubmit.co/Leonelsancu15@icloud.com" method="POST" novalidate data-reveal>
+        <input type="hidden" name="_subject" value="Neue Anfrage über vertex-studio">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" id="f-next" value="">
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field">
+          <span class="label mono" id="wantlabel">Ich möchte</span>
+          <div class="choices" role="radiogroup" aria-labelledby="wantlabel">
+            <label class="choice"><input type="radio" name="Anliegen" value="Kostenlose Demo" checked><span>Kostenlose Demo</span></label>
+            <label class="choice"><input type="radio" name="Anliegen" value="Angebot für ein Paket"><span>Angebot für ein Paket</span></label>
+            <label class="choice"><input type="radio" name="Anliegen" value="Erst mal ein Gespräch"><span>Erst mal ein Gespräch</span></label>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="Name" type="text" autocomplete="name" placeholder="Ihr Name" required><span class="msg">Bitte Ihren Namen eintragen.</span></div>
+          <div class="field"><label for="f-mail">E-Mail</label><input id="f-mail" name="E-Mail" type="email" autocomplete="email" placeholder="name@firma.de" required><span class="msg">Bitte eine gültige E-Mail-Adresse eintragen.</span></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-firma">Unternehmen / Projekt</label><input id="f-firma" name="Unternehmen" type="text" autocomplete="organization" placeholder="z. B. Praxis Müller, Studio X"></div>
+          <div class="field"><label for="f-plan">Paket (optional)</label>
+            <select id="f-plan" name="Paket">
+              <option value="Noch unklar">Noch unklar</option>
+              <option value="Signal – Landingpage">Signal – Landingpage (ab 1.490 €)</option>
+              <option value="Studio – Business-Website">Studio – Business-Website (ab 3.490 €)</option>
+              <option value="Commerce – Shop-Website">Commerce – Shop-Website (ab 5.900 €)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="f-msg">Worum geht es?</label><textarea id="f-msg" name="Nachricht" placeholder="Drei Sätze reichen: Was machen Sie, wer soll die Seite sehen, was soll sie auslösen?" required></textarea><span class="msg">Ein paar Sätze helfen mir, Ihnen konkret zu antworten.</span></div>
+        <div class="form-foot">
+          <button class="btn btn-solid" type="submit" id="submit" data-magnetic><span>Anfrage senden</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="mono">Mit dem Absenden stimmen Sie zu, dass ich Ihre Angaben zur Beantwortung Ihrer Anfrage verwende. Keine Newsletter, keine Weitergabe.</p>
+        </div>
+        <div class="form-ok" role="status" aria-live="polite">
+          <p class="mono" style="color:var(--accent)">Angekommen</p>
+          <h3>Danke – Ihre Anfrage ist bei mir.</h3>
+          <p class="mute">Ich melde mich in der Regel innerhalb eines Werktags mit einer ersten Einschätzung oder Rückfragen.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer data-theme="dark">
+  <div class="wrap">
+    <p class="foot-mark" data-split="words" aria-label="Vertex Studio">Vertex <em class="serif-i">Studio</em></p>
+    <div class="foot-grid">
+      <div>
+        <p class="mono">© <span id="year">2026</span> Vertex Studio · Leonel Sancu · Webdesign & Entwicklung</p>
+      </div>
+      <ul class="mono">
+        <li><a href="mailto:Leonelsancu15@icloud.com">E-Mail</a></li>
+        <li><a href="#top">Nach oben</a></li>
+        <li><a href="impressum.html">Impressum & Datenschutz</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const html = document.documentElement;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Vertex mesh (2D canvas, hero only) ---------- */
+  const canvas = document.getElementById('mesh');
+  const ctx = canvas.getContext('2d');
+  let W=0,H=0,DPR=1,pts=[],raf=null,running=false,mouse={x:-9999,y:-9999,tx:-9999,ty:-9999};
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,1.5);
+    const r=canvas.getBoundingClientRect();W=r.width;H=r.height;
+    canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+    const n=Math.min(150,Math.max(50,Math.round(W*H/14000)));
+    pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()<.06?2.2:1.2}));
+    pts[0].acc=true;
+  }
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    mouse.x+= (mouse.tx-mouse.x)*.08; mouse.y+= (mouse.ty-mouse.y)*.08;
+    const LINK=Math.min(150,W*.11), MR=200;
+    for(const p of pts){
+      if(!reduce){
+        p.x+=p.vx;p.y+=p.vy;
+        const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.hypot(dx,dy);
+        if(d<MR){const f=(1-d/MR)*.012;p.x+=dx*f;p.y+=dy*f;}
+        if(p.x<-20)p.x=W+20;if(p.x>W+20)p.x=-20;if(p.y<-20)p.y=H+20;if(p.y>H+20)p.y=-20;
+      }
+    }
+    ctx.lineWidth=1;
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i];
+      for(let j=i+1;j<pts.length;j++){
+        const b=pts[j];const dx=a.x-b.x,dy=a.y-b.y;const d2=dx*dx+dy*dy;
+        if(d2<LINK*LINK){
+          const d=Math.sqrt(d2);const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+          const md=Math.hypot(mouse.x-mx,mouse.y-my);
+          const near=Math.max(0,1-md/260);
+          const al=(1-d/LINK)*(.10+near*.45);
+          ctx.strokeStyle=near>.3?`rgba(255,90,31,${al})`:`rgba(242,239,233,${al})`;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
+    for(const p of pts){
+      ctx.fillStyle=p.acc?'#ff5a1f':'rgba(242,239,233,.7)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.acc?3:p.r,0,Math.PI*2);ctx.fill();
+    }
+    if(running&&!reduce)raf=requestAnimationFrame(frame);
+  }
+  function start(){if(running)return;running=true;raf=requestAnimationFrame(frame)}
+  function stop(){running=false;if(raf)cancelAnimationFrame(raf);raf=null}
+  resize();window.addEventListener('resize',()=>{resize();if(reduce)frame()});
+  const hero=document.querySelector('.hero');
+  new IntersectionObserver(e=>{e[0].isIntersecting&&!document.hidden?start():stop()},{threshold:.02}).observe(hero);
+  document.addEventListener('visibilitychange',()=>{document.hidden?stop():start()});
+  let mt=0;hero.addEventListener('pointermove',e=>{const now=performance.now();if(now-mt<16)return;mt=now;const r=canvas.getBoundingClientRect();mouse.tx=e.clientX-r.left;mouse.ty=e.clientY-r.top},{passive:true});
+  hero.addEventListener('pointerleave',()=>{mouse.tx=-9999;mouse.ty=-9999});
+  window.addEventListener('blur',()=>{mouse.tx=-9999;mouse.ty=-9999});
+  if(reduce)frame(); else start();
+
+  /* ---------- mobile menu ---------- */
+  const burger=document.querySelector('.burger');
+  burger.addEventListener('click',()=>{const o=document.body.classList.toggle('menu-open');burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Menü schließen':'Menü öffnen')});
+  document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>{document.body.classList.remove('menu-open');burger.setAttribute('aria-expanded','false')}));
+
+  /* ---------- plan → form prefill ---------- */
+  document.querySelectorAll('[data-plan]').forEach(a=>a.addEventListener('click',()=>{
+    const v=a.dataset.plan;const sel=document.getElementById('f-plan');
+    if(v==='Kostenlose Demo'){document.querySelector('input[name=Anliegen][value="Kostenlose Demo"]').checked=true;}
+    else{document.querySelector('input[name=Anliegen][value="Angebot für ein Paket"]').checked=true;[...sel.options].forEach(o=>{if(o.value===v)sel.value=v});}
+  }));
+
+  /* ---------- form ---------- */
+  const form=document.getElementById('form');
+  document.getElementById('f-next').value=location.origin+location.pathname+'?gesendet=1#contact';
+  if(location.search.includes('gesendet=1')){form.classList.add('done');}
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    let ok=true;
+    form.querySelectorAll('[required]').forEach(el=>{
+      const f=el.closest('.field');const valid=el.type==='email'?/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value):el.value.trim().length>0;
+      f.classList.toggle('err',!valid);if(!valid)ok=false;
+    });
+    if(!ok){form.querySelector('.err input, .err textarea')?.focus();return;}
+    const btn=document.getElementById('submit');btn.disabled=true;btn.querySelector('span').textContent='Wird gesendet …';
+    try{
+      const fd=new FormData(form);fd.append('_url',location.href);
+      const r=await fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{'Accept':'application/json'},body:fd});
+      if(!r.ok)throw new Error('bad');
+      form.classList.add('done');ScrollTrigger&&ScrollTrigger.refresh();
+    }catch(err){btn.disabled=false;btn.querySelector('span').textContent='Anfrage senden';form.removeAttribute('novalidate');form.submit();}
+  });
+  form.querySelectorAll('input,textarea').forEach(el=>el.addEventListener('input',()=>el.closest('.field')?.classList.remove('err')));
+
+  /* ---------- screenshot fallback ---------- */
+  document.querySelectorAll('img[data-shot]').forEach(img=>{
+    const media=img.closest('.case-media');
+    const done=()=>{if(img.naturalWidth>300)media.classList.add('has-shot');else img.remove()};
+    img.addEventListener('load',done);img.addEventListener('error',()=>img.remove());
+    if(img.complete)done();
+  });
+
+  if(!window.gsap||!window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.defaults({ease:'power3.out',duration:.85});
+  ScrollTrigger.config({ignoreMobileResize:true});
+
+  /* ---------- theme switching per section ---------- */
+  document.querySelectorAll('[data-theme]').forEach(sec=>{
+    const t=sec.dataset.theme;
+    ScrollTrigger.create({trigger:sec,start:'top 55%',end:'bottom 55%',
+      onEnter:()=>setTheme(t),onEnterBack:()=>setTheme(t)});
+  });
+  function setTheme(t){html.classList.toggle('theme-light',t==='light');html.classList.toggle('theme-dark',t!=='light');
+    document.querySelector('meta[name=theme-color]').content=t==='light'?'#f2efe9':'#0b0b0c';}
+
+  if(reduce){ /* static: everything visible, no smooth scroll, no scrub */
+    document.querySelectorAll('.manifest-line').forEach((l,i)=>{l.style.position='relative';l.style.opacity=1;l.style.margin='24px 0'});
+    document.querySelector('.manifest').style.height='auto';
+    document.querySelector('.manifest-stage').style.height='auto';document.querySelector('.manifest-stage').style.position='static';
+    document.querySelector('.manifest-stage').style.padding='120px 0';
+    return;
+  }
+  html.classList.add('has-motion');
+
+  /* ---------- Lenis (single smooth-scroll engine) ---------- */
+  const lenis=new Lenis({lerp:.085,smoothWheel:true,wheelMultiplier:.9});
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');if(id.length<2)return;const el=document.querySelector(id);if(!el)return;
+    e.preventDefault();lenis.scrollTo(el,{offset:0,duration:1.4,easing:t=>1-Math.pow(1-t,4)});
+  }));
+
+  /* ---------- word split (accessible) ---------- */
+  function split(el){
+    const text=el.textContent.trim();el.setAttribute('aria-label',text);
+    const walk=node=>{
+      [...node.childNodes].forEach(n=>{
+        if(n.nodeType===3){
+          const frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part=>{
+            if(!part)return;
+            if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(' '));return;}
+            const m=document.createElement('span');m.className='w-mask';m.setAttribute('aria-hidden','true');
+            const w=document.createElement('span');w.className='w';w.textContent=part;m.appendChild(w);frag.appendChild(m);
+          });
+          node.replaceChild(frag,n);
+        }else if(n.nodeType===1)walk(n);
+      });
+    };
+    walk(el);return el.querySelectorAll('.w');
+  }
+
+  /* ---------- hero intro ---------- */
+  const heroWords=split(document.querySelector('.hero h1'));
+  gsap.set('.hero [data-split]',{visibility:'visible'});
+  const intro=gsap.timeline({delay:.15});
+  intro.from(canvas,{autoAlpha:0,duration:1.6,ease:'power2.out'},0)
+    .fromTo('.nav',{y:-16,autoAlpha:0},{y:0,autoAlpha:1,duration:1},.2)
+    .fromTo('.hero-inner > .mono',{y:14,autoAlpha:0},{y:0,autoAlpha:1,visibility:'visible',duration:.8},.35)
+    .fromTo(heroWords,{yPercent:110,autoAlpha:0},{yPercent:0,autoAlpha:1,duration:1.1,ease:'power4.out',stagger:.06},.45)
+    .fromTo('.hero .lead',{y:22,autoAlpha:0},{y:0,autoAlpha:1,visibility:'visible',duration:.9},1.0)
+    .fromTo('.hero-actions',{y:22,autoAlpha:0},{y:0,autoAlpha:1,visibility:'visible',duration:.9},1.15)
+    .fromTo('.hero-foot',{autoAlpha:0},{autoAlpha:1,visibility:'visible',duration:.9},1.35);
+  gsap.to('.hero-inner',{yPercent:-12,autoAlpha:.15,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+
+  /* ---------- manifest scrub ---------- */
+  const lines=gsap.utils.toArray('.manifest-line');const idx=document.querySelector('[data-m-idx]');
+  gsap.set(lines,{autoAlpha:0,y:40,filter:'blur(6px)'});
+  const mtl=gsap.timeline({scrollTrigger:{trigger:'.manifest',start:'top top',end:'bottom bottom',scrub:.9,
+    onUpdate:s=>{const i=Math.min(3,Math.floor(s.progress*4));idx.textContent=`0${i+1} / 04`;}}});
+  lines.forEach((l,i)=>{
+    mtl.to(l,{autoAlpha:1,y:0,filter:'blur(0px)',duration:1,ease:'power2.out'},i*2);
+    if(i<lines.length-1) mtl.to(l,{autoAlpha:0,y:-40,filter:'blur(6px)',duration:1,ease:'power2.in'},i*2+1.5);
+  });
+  mtl.to({},{duration:1.2}); /* hold last line */
+  mtl.to('.manifest-bar i',{scaleX:1,duration:mtl.duration(),ease:'none'},0);
+
+  /* ---------- section headline word reveals ---------- */
+  gsap.utils.toArray('[data-split]').forEach(el=>{
+    if(el.closest('.hero'))return;
+    const words=split(el);
+    gsap.set(el,{visibility:'visible'});
+    gsap.fromTo(words,{yPercent:110,autoAlpha:0},{yPercent:0,autoAlpha:1,duration:1,ease:'power4.out',stagger:.045,
+      scrollTrigger:{trigger:el,start:'top 82%',once:true}});
+  });
+
+  /* ---------- generic reveals ---------- */
+  gsap.utils.toArray('[data-reveal-group]').forEach(g=>{
+    const items=g.querySelectorAll('[data-reveal]');
+    gsap.fromTo(items,{y:34,autoAlpha:0},{y:0,autoAlpha:1,visibility:'visible',duration:.95,ease:'power4.out',stagger:.085,
+      scrollTrigger:{trigger:g,start:'top 80%',once:true}});
+  });
+  gsap.utils.toArray('[data-reveal]').forEach(el=>{
+    if(el.closest('[data-reveal-group]')||el.closest('.hero'))return;
+    gsap.fromTo(el,{y:30,autoAlpha:0},{y:0,autoAlpha:1,visibility:'visible',duration:.95,ease:'power4.out',
+      scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+  });
+
+  /* ---------- case media clip + parallax ---------- */
+  gsap.utils.toArray('[data-clip]').forEach(fig=>{
+    const img=fig.querySelector('.frame');
+    gsap.set(fig,{visibility:'visible'});
+    gsap.timeline({scrollTrigger:{trigger:fig,start:'top 80%',once:true}})
+      .fromTo(fig,{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0% 0)',duration:1.2,ease:'power4.out'})
+      .fromTo(img,{scale:1.08},{scale:1,duration:1.4,ease:'power4.out'},0);
+    const i=fig.querySelector('img');
+    if(i)gsap.fromTo(i,{yPercent:-8},{yPercent:0,ease:'none',scrollTrigger:{trigger:fig,start:'top bottom',end:'bottom top',scrub:1.1,invalidateOnRefresh:true}});
+  });
+
+  /* ---------- big footer / demo word parallax ---------- */
+  gsap.to('.demo-big',{xPercent:-8,ease:'none',scrollTrigger:{trigger:'.demo',start:'top bottom',end:'bottom top',scrub:1.2}});
+
+  /* ---------- magnetic + cursor (fine pointer only) ---------- */
+  if(fine){
+    document.querySelectorAll('[data-magnetic]').forEach(el=>{
+      const xTo=gsap.quickTo(el,'x',{duration:.45,ease:'power3.out'}),yTo=gsap.quickTo(el,'y',{duration:.45,ease:'power3.out'});
+      el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();xTo((e.clientX-(r.left+r.width/2))*.22);yTo((e.clientY-(r.top+r.height/2))*.22)});
+      el.addEventListener('pointerleave',()=>{xTo(0);yTo(0)});
+    });
+    const cur=document.querySelector('.cursor'),lab=document.querySelector('.cursor-label');
+    const cx=gsap.quickTo(cur,'x',{duration:.3,ease:'power3.out'}),cy=gsap.quickTo(cur,'y',{duration:.3,ease:'power3.out'});
+    const lx=gsap.quickTo(lab,'x',{duration:.45,ease:'power3.out'}),ly=gsap.quickTo(lab,'y',{duration:.45,ease:'power3.out'});
+    window.addEventListener('pointermove',e=>{cx(e.clientX);cy(e.clientY);lx(e.clientX);ly(e.clientY)},{passive:true});
+    document.querySelectorAll('[data-cursor]').forEach(el=>{
+      el.addEventListener('pointerenter',()=>{lab.textContent=el.dataset.cursor;gsap.to(lab,{scale:1,duration:.5,ease:'power3.out'});gsap.to(cur,{scale:0,duration:.3})});
+      el.addEventListener('pointerleave',()=>{gsap.to(lab,{scale:0,duration:.4,ease:'power3.in'});gsap.to(cur,{scale:1,duration:.3})});
+    });
+    document.querySelectorAll('a,button').forEach(el=>{
+      if(el.hasAttribute('data-cursor'))return;
+      el.addEventListener('pointerenter',()=>gsap.to(cur,{scale:2.2,duration:.35}));
+      el.addEventListener('pointerleave',()=>gsap.to(cur,{scale:1,duration:.35}));
+    });
+    window.addEventListener('blur',()=>gsap.to([cur,lab],{scale:0,duration:.3}));
+  }
+
+  window.addEventListener('load',()=>{ScrollTrigger.refresh()});
+  if(document.fonts)document.fonts.ready.then(()=>ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
+
