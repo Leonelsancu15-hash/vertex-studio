@@ -4,10 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vertex Studio — Webdesign & Entwicklung | Websites, die Eindruck hinterlassen</title>
-<meta name="description" content="Vertex Studio: individuelle Websites für Unternehmen, Marken und Selbstständige. Konzeption, Design und Entwicklung aus einer Hand – mit kostenloser Demo vor der Beauftragung.">
+<meta name="description" content="Vertex Studio: individuelle Websites für Unternehmen, Marken und Selbstständige. Konzeption, Design und Entwicklung aus einer Hand. Kostenlose Demo vor der Beauftragung.">
 <meta property="og:title" content="Vertex Studio — Websites, die Eindruck hinterlassen">
-<meta property="og:description" content="Individuelle Websites für Unternehmen. Konzeption, Design und Entwicklung aus einer Hand – mit kostenloser Demo.">
+<meta property="og:description" content="Individuelle Websites für Unternehmen. Konzeption, Design und Entwicklung aus einer Hand. Kostenlose Demo vor der Beauftragung.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://leonelsancu15-hash.github.io/vertex-studio/og-image.png">
+<meta property="og:url" content="https://leonelsancu15-hash.github.io/vertex-studio/">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b0b0c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Cpath d='M6 8h5l5 12 5-12h5L18 26h-4z' fill='%23f2efe9'/%3E%3Ccircle cx='16' cy='26' r='2.2' fill='%23ff5a1f'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -216,6 +219,33 @@ html.has-motion [data-split],html.has-motion [data-reveal],html.has-motion [data
 .plans-note strong{color:var(--fg);font-weight:500}
 @media (max-width:980px){.plans{grid-template-columns:1fr}.plan .for{min-height:0}.plans-note{grid-template-columns:1fr}}
 
+/* ---------- portrait ---------- */
+.portrait{margin:0 0 28px;position:relative}
+.portrait .frame{aspect-ratio:4/5;overflow:hidden;border-radius:6px;background:var(--paper-3)}
+.portrait img{width:100%;height:112%;object-fit:cover;object-position:center top;will-change:transform;filter:saturate(.92)}
+.portrait figcaption{margin-top:12px}
+.facts{display:grid}
+/* ---------- case notes / quotes ---------- */
+.case .note{font-size:15px;color:var(--fg-mute);margin-top:18px;padding-left:18px;border-left:1px solid var(--accent);max-width:60ch}
+.quote{margin:26px 0 0;padding:22px 0 0;border-top:1px solid var(--line)}
+.quote p{font-family:var(--serif);font-style:italic;font-size:clamp(20px,1.7vw,26px);line-height:1.35;letter-spacing:-.01em;max-width:34ch}
+.quote footer{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-mute);margin-top:14px}
+/* ---------- faq ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:clamp(40px,6vw,120px);align-items:start}
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;font-size:clamp(18px,1.5vw,24px);font-weight:500;letter-spacing:-.02em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary i{flex:0 0 auto;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;position:relative;transition:transform .5s var(--ease),border-color .4s}
+.faq-item summary i::before,.faq-item summary i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1px;background:var(--fg);transform:translate(-50%,-50%)}
+.faq-item summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-item[open] summary i{transform:rotate(45deg);border-color:var(--accent)}
+.faq-item summary:hover i{border-color:var(--fg)}
+.faq-item > div{padding:0 0 26px}
+.faq-item > div p{font-size:16px;line-height:1.6;color:var(--fg-mute);max-width:62ch}
+.faq-aside{display:grid;gap:22px;position:sticky;top:120px}
+@media (max-width:900px){.faq-grid{grid-template-columns:1fr}.faq-aside{position:static}}
+
 /* ---------- demo ---------- */
 .demo{overflow:hidden}
 .demo-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,120px);align-items:end}
@@ -289,6 +319,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <li><a href="#work">Arbeiten</a></li>
       <li><a href="#process">Ablauf</a></li>
       <li><a href="#pricing">Pakete</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
   </nav>
@@ -300,6 +331,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
   <a href="#work">Arbeiten</a>
   <a href="#process">Ablauf</a>
   <a href="#pricing">Pakete</a>
+  <a href="#faq">FAQ</a>
   <a href="#demo">Kostenlose Demo</a>
   <a href="#contact">Kontakt</a>
   <p class="mono">Vertex Studio · Webdesign & Entwicklung</p>
@@ -314,7 +346,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
   <div class="wrap hero-inner">
     <p class="mono" data-reveal>Webdesign & Entwicklung · Individuelle Websites für Unternehmen</p>
     <h1 class="h-xl" data-split="words">Websites, die <em class="serif-i">Eindruck hinterlassen.</em></h1>
-    <p class="lead" data-reveal>Vertex Studio realisiert individuelle Websites für Unternehmen, Marken und Selbstständige – von der Konzeption bis zum Livegang. Hochwertig gestaltet, technisch einwandfrei umgesetzt, zu klar kalkulierten Festpreisen.</p>
+    <p class="lead" data-reveal>Vertex Studio realisiert individuelle Websites für Unternehmen, Marken und Selbstständige, von der Konzeption bis zum Livegang. Hochwertig gestaltet, technisch einwandfrei umgesetzt, zu klar kalkulierten Festpreisen.</p>
     <div class="hero-actions" data-reveal>
       <a class="btn btn-solid" href="#demo" data-magnetic><span>Kostenlose Demo anfragen</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn" href="#work" data-magnetic><span>Arbeiten ansehen</span></a>
@@ -347,18 +379,24 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
     </div>
     <div class="about-grid">
       <div class="about-copy">
-        <p data-reveal>Vertex Studio ist ein inhabergeführtes Studio für Webdesign und Webentwicklung. Während des gesamten Projekts haben Sie einen festen Ansprechpartner – von der ersten Abstimmung bis zum Livegang. Entscheidungen werden direkt getroffen, Absprachen verbindlich eingehalten.</p>
-        <p data-reveal>Der Name steht für das Konzept: Ein Vertex ist der Punkt, an dem Linien zusammenlaufen. Genau dort entsteht Ihre Website – an der Schnittstelle von Strategie, Gestaltung und Technik. Jeder Auftritt wird individuell konzipiert: eigene Typografie, eigene Bildsprache und eine Struktur, die Ihre Inhalte in der richtigen Reihenfolge vermittelt.</p>
-        <p data-reveal>Das Ergebnis ist eine Website, die Ihre Positionierung auf den ersten Blick kommuniziert – schnell ladend, barrierearm, für Suchmaschinen optimiert und auf jedem Endgerät konsistent dargestellt.</p>
+        <p data-reveal>Vertex Studio ist ein inhabergeführtes Studio für Webdesign und Webentwicklung. Während des gesamten Projekts haben Sie einen festen Ansprechpartner, von der ersten Abstimmung bis zum Livegang. Entscheidungen werden direkt getroffen, Absprachen verbindlich eingehalten.</p>
+        <p data-reveal>Der Name steht für das Konzept: Ein Vertex ist der Punkt, an dem Linien zusammenlaufen. Genau dort entsteht Ihre Website: an der Schnittstelle von Strategie, Gestaltung und Technik. Jeder Auftritt wird individuell konzipiert: eigene Typografie, eigene Bildsprache und eine Struktur, die Ihre Inhalte in der richtigen Reihenfolge vermittelt.</p>
+        <p data-reveal>Das Ergebnis ist eine Website, die Ihre Positionierung auf den ersten Blick kommuniziert. Sie lädt schnell, ist barrierearm, für Suchmaschinen optimiert und wird auf jedem Endgerät konsistent dargestellt.</p>
         <ul class="stack" data-reveal aria-label="Werkzeuge">
           <li>HTML · CSS · JavaScript</li><li>GSAP & ScrollTrigger</li><li>Lenis Smooth Scroll</li><li>Shopify · WooCommerce</li><li>GitHub Pages · Netlify</li><li>Figma</li>
         </ul>
       </div>
-      <aside class="about-side" data-reveal>
-        <div class="fact"><span class="mono">Was</span><div><strong>Konzeption, Design & Entwicklung</strong><span>Alle Leistungen aus einer Hand – von der Strategie bis zum Livegang.</span></div></div>
+      <aside class="about-side">
+        <figure class="portrait" data-clip>
+          <div class="frame"><img src="portrait.svg" alt="Leonel Sancu, Gründer von Vertex Studio" width="880" height="1100" loading="lazy" decoding="async"></div>
+          <figcaption class="mono">Leonel Sancu · Gründer</figcaption>
+        </figure>
+        <div class="facts" data-reveal>
+        <div class="fact"><span class="mono">Was</span><div><strong>Konzeption, Design & Entwicklung</strong><span>Alle Leistungen aus einer Hand, von der Strategie bis zum Livegang.</span></div></div>
         <div class="fact"><span class="mono">Für wen</span><div><strong>Unternehmen, Marken, Selbstständige</strong><span>Für alle, die einen Auftritt auf dem Niveau ihrer Arbeit erwarten.</span></div></div>
         <div class="fact"><span class="mono">Wie</span><div><strong>Direkt & verbindlich</strong><span>Ein Ansprechpartner, Festpreise, verbindliche Zeitpläne.</span></div></div>
         <div class="fact"><span class="mono">Wo</span><div><strong>Deutschland, remote</strong><span>Abstimmung per Video, Telefon oder E-Mail.</span></div></div>
+        </div>
       </aside>
     </div>
   </div>
@@ -377,7 +415,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <div class="case-meta" data-reveal>
         <span class="mono">A —</span>
         <h3>Archangel Armor</h3>
-        <span class="mono">Gym & Street Apparel · Brand-Site</span>
+        <span class="mono">Gym & Street Apparel · Eigene Marke</span>
       </div>
       <div class="case-media" data-clip data-parallax>
         <span class="badge"><i></i>Live</span>
@@ -390,10 +428,11 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <div class="case-body">
         <div>
           <p data-reveal>Eine Apparel-Marke mit klarer Haltung: dunkel, schwer, kompromisslos. Die Website inszeniert das Markenwappen als scroll-gesteuerte Sequenz, die sich Kapitel für Kapitel aufbaut, bevor die Kollektion erscheint. Statt eines Kataloglayouts entsteht ein Markenerlebnis, das die Positionierung in wenigen Sekunden vermittelt.</p>
+          <p class="note" data-reveal>Archangel Armor ist meine eigene Marke. An diesem Projekt entwickle und teste ich, was ich Kunden empfehle: Konzept, Gestaltung, Shop-Anbindung und Domain, alles unter realen Bedingungen.</p>
           <a class="case-cta" href="https://archangel-armor.com" target="_blank" rel="noopener" data-reveal>archangel-armor.com <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         </div>
         <div class="case-tags" data-reveal>
-          <div><span class="mono">Leistung</span><span>Konzeption, Art Direction, Design, Entwicklung</span></div>
+          <div><span class="mono">Leistung</span><span>Konzeption, Art Direction, Design, Entwicklung, Shop</span></div>
           <div><span class="mono">Besonderheit</span><span>Scroll-gesteuerte Wappen-Sequenz, kapitelbasierte Dramaturgie</span></div>
           <div><span class="mono">Technik</span><span>GSAP · ScrollTrigger · Smooth Scroll · eigene Domain</span></div>
           <div><span class="mono">Sprache</span><span>Englisch</span></div>
@@ -406,19 +445,9 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <div class="case-meta" data-reveal>
         <span class="mono">B —</span>
         <h3>Nala Moon Studio</h3>
-        <span class="mono">3D-Druck-Manufaktur · Studio-Site mit Shop-Vorschau</span>
-      </div>
-      <div class="case-media" data-clip data-parallax>
-        <span class="badge"><i></i>Live</span>
-        <div class="frame">
-          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/http://nalamoon-studio.com" alt="Startseite von nalamoon-studio.com: warme, dunkle Hero-Szene mit der Zeile ‚Kleine Ideen. Gedruckt mit Liebe.‘" loading="lazy" decoding="async">
-          <div class="poster" aria-hidden="true"><p class="mono">nalamoon-studio.com</p><p class="t">Kleine Ideen.<span class="serif-i">Gedruckt mit Liebe.</span></p></div>
-        </div>
-        <a class="case-link" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" aria-label="Nala Moon Studio live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
-      </div>
-      <div class="case-body">
-        <div>
-          <p data-reveal>Eine 3D-Druck-Manufaktur aus Bonn für personalisierte Einzelstücke. Die Website übersetzt den Fertigungsprozess in eine Scroll-Erzählung – von der Idee über Slicing und Druck bis zum verpackten Produkt – und verbindet Gründerinnen-Geschichte, Produktwelt und Kollektionsvorschau zu einem stimmigen Auftritt.</p>
+            <footer>Jacqueline, Nala Moon Studio</footer>
+          </blockquote>
+          -->
           <a class="case-cta" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" data-reveal>nalamoon-studio.com <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         </div>
         <div class="case-tags" data-reveal>
@@ -442,7 +471,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
     </div>
     <div class="steps" data-reveal-group>
       <div class="step" data-reveal><span class="num">01</span><h3>Erstgespräch</h3><p>In einem kurzen Gespräch klären wir Ziele, Zielgruppe und Umfang Ihres Vorhabens. Im Anschluss erhalten Sie eine klare Einschätzung zu Umsetzung, Zeitrahmen und Kosten.</p></div>
-      <div class="step" data-reveal><span class="num">02</span><h3>Kostenlose Demo</h3><p>Innerhalb von fünf Werktagen erhalten Sie eine erste Demo Ihrer Startseite – mit Ihren Inhalten, in finaler Typografie und Animation. Unverbindlich und kostenfrei.</p></div>
+      <div class="step" data-reveal><span class="num">02</span><h3>Kostenlose Demo</h3><p>Innerhalb von fünf Werktagen erhalten Sie eine erste Demo Ihrer Startseite, mit Ihren Inhalten, in finaler Typografie und Animation. Unverbindlich und kostenfrei.</p></div>
       <div class="step" data-reveal><span class="num">03</span><h3>Design & Umsetzung</h3><p>Nach Freigabe der Richtung entsteht die vollständige Website. Über eine Vorschau-Adresse verfolgen Sie den Fortschritt und geben Ihr Feedback in definierten Korrekturrunden.</p></div>
       <div class="step" data-reveal><span class="num">04</span><h3>Livegang & Betreuung</h3><p>Domain, Hosting und Kontaktformular werden eingerichtet, anschließend wird die Website veröffentlicht. Auf Wunsch übernehme ich danach Pflege und Aktualisierungen.</p></div>
     </div>
@@ -487,7 +516,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       </div>
       <div class="plan" data-reveal>
         <div class="plan-top"><h3>Commerce</h3><span class="mono">Shop-Website</span></div>
-        <p class="for">Für Marken und Manufakturen, die online verkaufen möchten – mit einem Shop, der zur Marke passt.</p>
+        <p class="for">Für Marken und Manufakturen, die online verkaufen möchten und einen Shop erwarten, der zur Marke passt.</p>
         <div class="price"><span class="mono">ab</span><b>2.490 €</b><small>netto</small></div>
         <ul>
           <li>Markenauftritt inklusive Shop (Shopify oder WooCommerce)</li>
@@ -502,7 +531,31 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
     </div>
     <div class="plans-note" data-reveal>
       <p><strong>Festpreis statt Nachträge.</strong> Nach dem Erstgespräch erhalten Sie ein verbindliches Angebot mit klar definiertem Leistungsumfang. Zusätzliche Wünsche werden vorab besprochen und transparent kalkuliert.</p>
-      <p><strong>Betreuung optional ab 39 € / Monat:</strong> Hosting, Aktualisierungen und kleinere Anpassungen – Sie senden mir die gewünschte Änderung, ich setze sie um. Alle Preise verstehen sich netto.</p>
+      <p><strong>Betreuung optional ab 39 € / Monat:</strong> Hosting, Aktualisierungen und kleinere Anpassungen. Sie senden mir die gewünschte Änderung, ich setze sie um. Alle Preise verstehen sich netto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec faq" id="faq" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h-l" data-split="words">Häufige <em class="serif-i">Fragen.</em></h2>
+      <p class="mono"><b>05</b> FAQ</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-list" data-reveal-group>
+        <details class="faq-item" data-reveal><summary><span>Was passiert nach der kostenlosen Demo?</span><i></i></summary><div><p>Sie sehen die Demo Ihrer Startseite unter einer privaten Vorschau-Adresse. Gefällt Ihnen die Richtung, erhalten Sie ein verbindliches Angebot für das passende Paket. Erst mit Ihrer Beauftragung beginnt die kostenpflichtige Umsetzung. Entscheiden Sie sich dagegen, entstehen Ihnen keine Kosten.</p></div></details>
+        <details class="faq-item" data-reveal><summary><span>Wem gehört die fertige Website?</span><i></i></summary><div><p>Ihnen. Nach vollständiger Bezahlung erhalten Sie alle Dateien sowie Zugang zu Domain und Hosting. Sie sind an keinen Anbieter und an keine laufende Gebühr gebunden.</p></div></details>
+        <details class="faq-item" data-reveal><summary><span>Was ist, wenn ich später Änderungen brauche?</span><i></i></summary><div><p>Kleinere Anpassungen wie neue Texte, Bilder oder Öffnungszeiten übernehme ich im Rahmen der optionalen Betreuung ab 39 € im Monat. Größere Erweiterungen, etwa neue Unterseiten, kalkuliere ich vorab zum Festpreis.</p></div></details>
+        <details class="faq-item" data-reveal><summary><span>Kann ich meine bestehende Domain behalten?</span><i></i></summary><div><p>Ja. Ihre bestehende Domain wird auf die neue Website umgestellt, ohne Unterbrechung Ihrer E-Mail-Adressen. Haben Sie noch keine Domain, kümmere ich mich um Registrierung und Einrichtung.</p></div></details>
+        <details class="faq-item" data-reveal><summary><span>Muss ich Texte und Bilder selbst liefern?</span><i></i></summary><div><p>Nicht zwingend. Eine kurze Beschreibung Ihres Unternehmens genügt als Grundlage. Die Texte formuliere ich daraus, Sie geben sie frei. Eigene Fotos verbessern das Ergebnis deutlich; wo keine vorhanden sind, arbeite ich mit hochwertigen, lizenzierten Bildern.</p></div></details>
+        <details class="faq-item" data-reveal><summary><span>Wie läuft die Bezahlung?</span><i></i></summary><div><p>50 % bei Beauftragung, 50 % nach Ihrer Freigabe vor dem Livegang. Sie erhalten für jeden Schritt eine ordentliche Rechnung. Die Demo ist in jedem Fall kostenfrei.</p></div></details>
+      </div>
+      <aside class="faq-aside" data-reveal>
+        <p class="mute">Ihre Frage ist nicht dabei? Schreiben Sie mir kurz, ich antworte in der Regel innerhalb eines Werktags.</p>
+        <a class="btn" href="#contact"><span>Frage stellen</span></a>
+      </aside>
     </div>
   </div>
 </section>
@@ -513,16 +566,16 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h-l" data-split="words">Erst sehen, <em class="serif-i">dann entscheiden.</em></h2>
-      <p class="mono"><b>05</b> Kostenlose Demo</p>
+      <p class="mono"><b>06</b> Kostenlose Demo</p>
     </div>
     <div class="demo-grid">
       <div>
-        <p class="lead" data-reveal>Verlassen Sie sich nicht auf Zusagen, sondern auf Ergebnisse. Beschreiben Sie mir Ihr Unternehmen – innerhalb von fünf Werktagen erhalten Sie eine funktionierende Demo Ihrer Startseite. Unverbindlich und ohne Vorkasse.</p>
+        <p class="lead" data-reveal>Verlassen Sie sich nicht auf Zusagen, sondern auf Ergebnisse. Beschreiben Sie mir Ihr Unternehmen. Innerhalb von fünf Werktagen erhalten Sie eine funktionierende Demo Ihrer Startseite, unverbindlich und ohne Vorkasse.</p>
         <div style="margin-top:34px" data-reveal><a class="btn btn-solid" href="#contact" data-magnetic data-plan="Kostenlose Demo"><span>Demo anfragen</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       </div>
       <div class="demo-steps" data-reveal>
         <div><span class="mono">01</span><span>Sie senden mir eine kurze Beschreibung Ihres Unternehmens, Ihrer bestehenden Website (falls vorhanden) und Ihrer Ziele.</span></div>
-        <div><span class="mono">02</span><span>Ich erstelle eine Demo Ihrer Startseite unter einer privaten Vorschau-Adresse – mit Ihrem Namen, Ihren Farben, Ihren Inhalten.</span></div>
+        <div><span class="mono">02</span><span>Ich erstelle eine Demo Ihrer Startseite unter einer privaten Vorschau-Adresse, mit Ihrem Namen, Ihren Farben und Ihren Inhalten.</span></div>
         <div><span class="mono">03</span><span>Überzeugt Sie das Ergebnis, wird daraus Ihr Projekt. Andernfalls entstehen Ihnen keinerlei Kosten.</span></div>
       </div>
     </div>
@@ -534,11 +587,11 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h-l" data-split="words">Sprechen wir über Ihr <em class="serif-i">Projekt.</em></h2>
-      <p class="mono"><b>06</b> Anfrage</p>
+      <p class="mono"><b>07</b> Anfrage</p>
     </div>
     <div class="contact-grid">
       <aside class="contact-aside" data-reveal>
-        <p class="mute">Ob kostenlose Demo, konkretes Paket oder ein erstes Gespräch – beschreiben Sie mir in wenigen Sätzen Ihr Vorhaben. Sie erhalten in der Regel innerhalb eines Werktags eine Rückmeldung.</p>
+        <p class="mute">Ob kostenlose Demo, konkretes Paket oder ein erstes Gespräch: Beschreiben Sie mir in wenigen Sätzen Ihr Vorhaben. Sie erhalten in der Regel innerhalb eines Werktags eine Rückmeldung.</p>
         <a class="mail" href="mailto:Leonelsancu15@icloud.com">Leonelsancu15@icloud.com</a>
         <p class="mono">Rückmeldung in der Regel innerhalb von 24 h · Mo–Fr</p>
       </aside>
@@ -578,7 +631,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
         </div>
         <div class="form-ok" role="status" aria-live="polite">
           <p class="mono" style="color:var(--accent)">Eingegangen</p>
-          <h3>Vielen Dank – Ihre Anfrage ist eingegangen.</h3>
+          <h3>Vielen Dank. Ihre Anfrage ist eingegangen.</h3>
           <p class="mute">Sie erhalten in der Regel innerhalb eines Werktags eine erste Einschätzung oder Rückfragen von mir.</p>
         </div>
       </form>
@@ -847,10 +900,27 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
     window.addEventListener('blur',()=>gsap.to([cur,lab],{scale:0,duration:.3}));
   }
 
+  document.querySelectorAll('.faq-item').forEach(d=>d.addEventListener('toggle',()=>ScrollTrigger.refresh()));
   window.addEventListener('load',()=>{ScrollTrigger.refresh()});
   if(document.fonts)document.fonts.ready.then(()=>ScrollTrigger.refresh());
 })();
 </script>
 </body>
 </html>
+        <span class="mono">3D-Druck-Manufaktur · Studio-Site mit Shop-Vorschau</span>
+      </div>
+      <div class="case-media" data-clip data-parallax>
+        <span class="badge"><i></i>Live</span>
+        <div class="frame">
+          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/http://nalamoon-studio.com" alt="Startseite von nalamoon-studio.com: warme, dunkle Hero-Szene mit der Zeile ‚Kleine Ideen. Gedruckt mit Liebe.‘" loading="lazy" decoding="async">
+          <div class="poster" aria-hidden="true"><p class="mono">nalamoon-studio.com</p><p class="t">Kleine Ideen.<span class="serif-i">Gedruckt mit Liebe.</span></p></div>
+        </div>
+        <a class="case-link" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" aria-label="Nala Moon Studio live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
+      </div>
+      <div class="case-body">
+        <div>
+          <p data-reveal>Eine 3D-Druck-Manufaktur aus Bonn für personalisierte Einzelstücke. Die Website übersetzt den Fertigungsprozess in eine Scroll-Erzählung, von der Idee über Slicing und Druck bis zum verpackten Produkt. Gründerinnen-Geschichte, Produktwelt und Kollektionsvorschau verbinden sich zu einem stimmigen Auftritt.</p>
+          <!-- Kundenstimme: erst nach Freigabe durch Jacqueline einkommentieren
+          <blockquote class="quote" data-reveal>
+            <p>„Leonel hat aus ein paar Sätzen über mein Studio eine Website gemacht, die genau so aussieht, wie ich mir Nala Moon vorgestellt habe. Der ganze Ablauf war unkompliziert, und das Ergebnis hat mich wirklich beeindruckt.“</p>
 
