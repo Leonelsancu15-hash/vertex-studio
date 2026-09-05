@@ -420,7 +420,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <div class="case-media" data-clip data-parallax>
         <span class="badge"><i></i>Live</span>
         <div class="frame">
-          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/https://archangel-armor.com" alt="Startseite von archangel-armor.com: dunkle Hero-Szene mit dem Schriftzug ‚This is not fashion. This is armor.‘" loading="lazy" decoding="async">
+          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/https://archangel-armor.com" alt="Startseite von archangel-armor.com: dunkle Hero-Szene mit dem Schriftzug ‚This is not fashion. This is armor.‘" loading="eager" decoding="async">
           <div class="poster" aria-hidden="true"><p class="mono">archangel-armor.com</p><p class="t">This is not fashion.<span class="serif-i">This is armor.</span></p></div>
         </div>
         <a class="case-link" href="https://archangel-armor.com" target="_blank" rel="noopener" aria-label="Archangel Armor live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
@@ -445,6 +445,22 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       <div class="case-meta" data-reveal>
         <span class="mono">B —</span>
         <h3>Nala Moon Studio</h3>
+        <span class="mono">3D-Druck-Manufaktur · Studio-Site mit Shop-Vorschau</span>
+      </div>
+      <div class="case-media" data-clip data-parallax>
+        <span class="badge"><i></i>Live</span>
+        <div class="frame">
+          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/http://nalamoon-studio.com" alt="Startseite von nalamoon-studio.com: warme, dunkle Hero-Szene mit der Zeile ‚Kleine Ideen. Gedruckt mit Liebe.‘" loading="eager" decoding="async">
+          <div class="poster" aria-hidden="true"><p class="mono">nalamoon-studio.com</p><p class="t">Kleine Ideen.<span class="serif-i">Gedruckt mit Liebe.</span></p></div>
+        </div>
+        <a class="case-link" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" aria-label="Nala Moon Studio live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
+      </div>
+      <div class="case-body">
+        <div>
+          <p data-reveal>Eine 3D-Druck-Manufaktur aus Bonn für personalisierte Einzelstücke. Die Website übersetzt den Fertigungsprozess in eine Scroll-Erzählung, von der Idee über Slicing und Druck bis zum verpackten Produkt. Gründerinnen-Geschichte, Produktwelt und Kollektionsvorschau verbinden sich zu einem stimmigen Auftritt.</p>
+          <!-- Kundenstimme: erst nach Freigabe durch Jacqueline einkommentieren
+          <blockquote class="quote" data-reveal>
+            <p>„Leonel hat aus ein paar Sätzen über mein Studio eine Website gemacht, die genau so aussieht, wie ich mir Nala Moon vorgestellt habe. Der ganze Ablauf war unkompliziert, und das Ergebnis hat mich wirklich beeindruckt.“</p>
             <footer>Jacqueline, Nala Moon Studio</footer>
           </blockquote>
           -->
@@ -759,10 +775,11 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
 
   /* ---------- screenshot fallback ---------- */
   document.querySelectorAll('img[data-shot]').forEach(img=>{
-    const media=img.closest('.case-media');
-    const done=()=>{if(img.naturalWidth>300)media.classList.add('has-shot');else img.remove()};
-    img.addEventListener('load',done);img.addEventListener('error',()=>img.remove());
-    if(img.complete)done();
+    const media=img.closest('.case-media');const base=img.getAttribute('src');let tries=0;
+    const retry=()=>{if(++tries>5){img.style.display='none';return;}setTimeout(()=>{img.removeAttribute('src');img.src=base;},2000*tries);};
+    const done=()=>{if(img.naturalWidth>300)media.classList.add('has-shot');else retry();};
+    img.addEventListener('load',done);img.addEventListener('error',retry);
+    if(img.complete&&img.naturalWidth>0)done();
   });
 
   if(!window.gsap||!window.ScrollTrigger) return;
@@ -907,20 +924,4 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
 </script>
 </body>
 </html>
-        <span class="mono">3D-Druck-Manufaktur · Studio-Site mit Shop-Vorschau</span>
-      </div>
-      <div class="case-media" data-clip data-parallax>
-        <span class="badge"><i></i>Live</span>
-        <div class="frame">
-          <img data-shot src="https://image.thum.io/get/width/1600/crop/1000/noanimate/http://nalamoon-studio.com" alt="Startseite von nalamoon-studio.com: warme, dunkle Hero-Szene mit der Zeile ‚Kleine Ideen. Gedruckt mit Liebe.‘" loading="lazy" decoding="async">
-          <div class="poster" aria-hidden="true"><p class="mono">nalamoon-studio.com</p><p class="t">Kleine Ideen.<span class="serif-i">Gedruckt mit Liebe.</span></p></div>
-        </div>
-        <a class="case-link" href="https://leonelsancu15-hash.github.io/nala-moon-studio/" target="_blank" rel="noopener" aria-label="Nala Moon Studio live ansehen (öffnet in neuem Tab)" data-cursor="Live ansehen"></a>
-      </div>
-      <div class="case-body">
-        <div>
-          <p data-reveal>Eine 3D-Druck-Manufaktur aus Bonn für personalisierte Einzelstücke. Die Website übersetzt den Fertigungsprozess in eine Scroll-Erzählung, von der Idee über Slicing und Druck bis zum verpackten Produkt. Gründerinnen-Geschichte, Produktwelt und Kollektionsvorschau verbinden sich zu einem stimmigen Auftritt.</p>
-          <!-- Kundenstimme: erst nach Freigabe durch Jacqueline einkommentieren
-          <blockquote class="quote" data-reveal>
-            <p>„Leonel hat aus ein paar Sätzen über mein Studio eine Website gemacht, die genau so aussieht, wie ich mir Nala Moon vorgestellt habe. Der ganze Ablauf war unkompliziert, und das Ergebnis hat mich wirklich beeindruckt.“</p>
 
