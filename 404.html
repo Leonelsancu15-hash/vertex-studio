@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seite nicht gefunden — Vertex Studio</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b0b0c'/%3E%3Cpath d='M6 8h5l5 12 5-12h5L18 26h-4z' fill='%23f2efe9'/%3E%3Ccircle cx='16' cy='26' r='2.2' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/fonts.css">
+<style>
+:root{--ink:#0b0b0c;--paper:#f2efe9;--accent:#ff5a1f;--line:rgba(242,239,233,.16);--mute:rgba(242,239,233,.58);--gutter:clamp(20px,4vw,64px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--ink);color:var(--paper);font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.5;font-size:17px;-webkit-font-smoothing:antialiased;display:grid;grid-template-rows:auto 1fr auto;min-height:100svh}
+a{color:inherit;text-decoration:none}
+.nav{display:flex;justify-content:space-between;align-items:center;height:84px;padding:0 var(--gutter);font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:15px;letter-spacing:-.02em;text-transform:none}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.wrap{max-width:1440px;width:100%;margin:0 auto;padding:40px var(--gutter) 60px;display:grid;align-content:center;gap:28px}
+.mono{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:clamp(46px,9.2vw,152px);font-weight:500;letter-spacing:-.035em;line-height:.98;max-width:12ch;text-wrap:balance}
+h1 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+p{max-width:44ch;font-size:clamp(17px,1.3vw,21px);color:var(--mute)}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:16px 24px;border-radius:999px;border:1px solid var(--line);transition:background .4s,color .4s,border-color .4s}
+.btn:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn-solid{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.btn-solid:hover{background:var(--paper);border-color:var(--paper)}
+footer{padding:24px var(--gutter);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 26px;justify-content:space-between}
+footer ul{list-style:none;display:flex;gap:22px;flex-wrap:wrap}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+</style>
+</head>
+<body>
+<header class="nav"><a class="logo" href="/"><i></i>VERTEX STUDIO</a><a href="/#contact">Kontakt</a></header>
+<main class="wrap">
+  <p class="mono">Fehler 404 · Seite nicht gefunden</p>
+  <h1>Diese Seite gibt es <em>nicht.</em></h1>
+  <p>Die Adresse ist falsch geschrieben, oder die Seite wurde verschoben. Auf der Startseite finden Sie Referenzen, Ablauf, Pakete und das Anfrageformular.</p>
+  <div class="actions">
+    <a class="btn btn-solid" href="/"><span>Zur Startseite</span></a>
+    <a class="btn" href="mailto:leonel@vertexstudio.digital"><span>E-Mail schreiben</span></a>
+  </div>
+</main>
+<footer class="mono">
+  <span>© <span id="year">2026</span> Vertex Studio · Leonel Sancu · Bonn</span>
+  <ul><li><a href="/impressum.html">Impressum</a></li><li><a href="/datenschutz.html">Datenschutz</a></li><li><a href="/agb.html">AGB</a></li></ul>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
