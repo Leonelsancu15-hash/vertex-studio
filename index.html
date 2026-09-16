@@ -628,13 +628,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
         <a class="mail" href="mailto:leonel@vertexstudio.digital">leonel@vertexstudio.digital</a>
         <p class="mono">Rückmeldung in der Regel innerhalb von 24 h · Mo–Fr</p>
       </aside>
-      <form id="form" action="https://formsubmit.co/leonel@vertexstudio.digital" method="POST" novalidate data-reveal>
-        <input type="hidden" name="_subject" value="Neue Anfrage über vertexstudio.digital">
-        <input type="hidden" name="_autoresponse" value="Vielen Dank für Ihre Anfrage an Vertex Studio. Ihre Nachricht ist eingegangen; Sie erhalten in der Regel innerhalb eines Werktags eine Rückmeldung von mir. Leonel Sancu, Vertex Studio – leonel@vertexstudio.digital">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" id="f-next" value="">
-        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form id="form" action="mailto:leonel@vertexstudio.digital" method="post" enctype="text/plain" novalidate data-reveal>
         <div class="field">
           <span class="label mono" id="wantlabel">Ich möchte</span>
           <div class="choices" role="radiogroup" aria-labelledby="wantlabel">
@@ -661,12 +655,12 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
         <div class="field"><label for="f-msg">Worum geht es?</label><textarea id="f-msg" name="Nachricht" placeholder="Kurz zusammengefasst: Was macht Ihr Unternehmen, wen soll die Website erreichen, was soll sie bewirken?" required></textarea><span class="msg">Eine kurze Beschreibung hilft mir, Ihnen konkret zu antworten.</span></div>
         <div class="form-foot">
           <button class="btn btn-solid" type="submit" id="submit" data-magnetic><span>Anfrage senden</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <p class="mono">Mit dem Absenden erklären Sie sich einverstanden, dass Ihre Angaben zur Bearbeitung Ihrer Anfrage verwendet werden. Keine Newsletter, keine Weitergabe an Dritte. <a href="datenschutz.html" style="text-decoration:underline">Datenschutzhinweise</a></p>
+          <p class="mono">Beim Absenden öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Nachricht an leonel@vertexstudio.digital. Erst wenn Sie diese dort senden, erhalte ich Ihre Anfrage. Es wird kein externer Formulardienst genutzt. <a href="datenschutz.html" style="text-decoration:underline">Datenschutzhinweise</a></p>
         </div>
         <div class="form-ok" role="status" aria-live="polite">
-          <p class="mono" style="color:var(--accent)">Eingegangen</p>
-          <h3>Vielen Dank. Ihre Anfrage ist eingegangen.</h3>
-          <p class="mute">Sie erhalten in der Regel innerhalb eines Werktags eine erste Einschätzung oder Rückfragen von mir.</p>
+          <p class="mono" style="color:var(--accent)">Fast geschafft</p>
+          <h3>Ihr E-Mail-Programm sollte sich geöffnet haben.</h3>
+          <p class="mute">Bitte senden Sie die vorbereitete Nachricht dort ab. Sie erhalten in der Regel innerhalb eines Werktags eine Antwort. Falls sich nichts geöffnet hat, schreiben Sie direkt an <a href="mailto:leonel@vertexstudio.digital" style="text-decoration:underline">leonel@vertexstudio.digital</a>.</p>
         </div>
       </form>
     </div>
@@ -788,8 +782,6 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
 
   /* ---------- form ---------- */
   const form=document.getElementById('form');
-  document.getElementById('f-next').value=location.origin+location.pathname+'?gesendet=1#contact';
-  if(location.search.includes('gesendet=1')){form.classList.add('done');}
   form.addEventListener('submit',async e=>{
     e.preventDefault();
     let ok=true;
@@ -798,13 +790,11 @@ footer{padding:60px 0 32px;border-top:1px solid var(--line)}
       f.classList.toggle('err',!valid);if(!valid)ok=false;
     });
     if(!ok){form.querySelector('.err input, .err textarea')?.focus();return;}
-    const btn=document.getElementById('submit');btn.disabled=true;btn.querySelector('span').textContent='Wird gesendet …';
-    try{
-      const fd=new FormData(form);fd.append('_url',location.href);
-      const r=await fetch(form.action.replace('formsubmit.co/','formsubmit.co/ajax/'),{method:'POST',headers:{'Accept':'application/json'},body:fd});
-      if(!r.ok)throw new Error('bad');
-      form.classList.add('done');ScrollTrigger&&ScrollTrigger.refresh();
-    }catch(err){btn.disabled=false;btn.querySelector('span').textContent='Anfrage senden';form.removeAttribute('novalidate');form.submit();}
+    const val=n=>((form.elements[n]&&form.elements[n].value)||'').trim();
+    const want=(form.querySelector('input[name="Anliegen"]:checked')||{}).value||'';
+    const body=['Anliegen: '+want,'Name: '+val('Name'),'E-Mail: '+val('E-Mail'),'Unternehmen: '+val('Unternehmen'),'Paket: '+val('Paket'),'','Nachricht:',val('Nachricht')].join('\r\n');
+    location.href='mailto:leonel@vertexstudio.digital?subject='+encodeURIComponent('Anfrage über vertexstudio.digital: '+want)+'&body='+encodeURIComponent(body);
+    form.classList.add('done');if(window.ScrollTrigger)ScrollTrigger.refresh();
   });
   form.querySelectorAll('input,textarea').forEach(el=>el.addEventListener('input',()=>el.closest('.field')?.classList.remove('err')));
 
